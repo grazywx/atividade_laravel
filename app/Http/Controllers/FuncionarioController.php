@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 
@@ -27,7 +28,7 @@ class FuncionarioController extends Controller
         return view('funcionario_create');
     }
 
-    public function store(Request $request)
+    public function store(AppServiceProvider $request)
     {
         $created = $this->funcionario->create([
             'nome' => $request->input('nome'),
@@ -51,7 +52,7 @@ class FuncionarioController extends Controller
        return view('funcionario_edit', ['funcionario' => $funcionario]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(AppServiceProvider $request, string $id)
     {
         $updated = $this->funcionario->where('id', $id)->update($request->except(['_token', '_method']));
         if($updated) {
